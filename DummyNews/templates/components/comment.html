@@ -1,0 +1,15 @@
+<div class="card mt-2 mb-2">
+  <div class="card-body">
+    <p class="card-text"> {{comment.text}} </p>
+    <small></small>
+
+    <div class="card mt-2 mb-2">
+      <div class="card-body">
+        {% for comment in comment.replies %}
+          {% include "./components/comment.html" %}
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</div>

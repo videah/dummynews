@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% for post in posts %}
+        {% include "components/post_card.html" %}
+    {% endfor %}
+{% endblock %}

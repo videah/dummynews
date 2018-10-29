@@ -1,0 +1,12 @@
+<div class="card mt-2 mb-2">
+    <div class="card-body">
+        <p class="card-text">
+          <a href="{{post.link}}">{{post.title}}</a>
+        </p>
+        <small>
+          Score: <span class="vote">{{post.score}}</span> ;
+          <a href="/post/{{post.id}}">comments: </a>
+          {{post.created_at}} by {{post.author()}}
+        </small>
+    </div>
+</div>
