@@ -33,6 +33,7 @@ class User(db.Model, UserMixin):
   posts = db.relationship("Post")
   comments = db.relationship("Comment")
   job_listings = db.relationship("JobListing")
+  bans = db.relationship("Ban")
   roles = db.relationship(
       'Role',
       secondary=roles_users,
@@ -47,6 +48,7 @@ class Post(db.Model):
   title = db.Column(db.String(255), nullable=False)
   link = db.Column(db.String(512), nullable=False)
   score = db.Column(db.Integer, nullable=False)
+  reports = db.relationship("Report")
 
   def author(self):
     return User.query.filter_by(id=self.poster_id).all()[0].username
@@ -57,6 +59,7 @@ class Comment(db.Model):
   poster_id = db.Column(db.Integer, db.ForeignKey("user.id"))
   parent_id = db.Column(db.Integer, db.ForeignKey("comment.id"))
   post_id = db.Column(db.Integer, db.ForeignKey("post.id"))
+  reports = db.relationship("Report")
   replies = db.relationship(
       'Comment',
       backref=db.backref('parent', remote_side=[id]),
@@ -67,12 +70,19 @@ class Comment(db.Model):
 class JobListing(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   poster_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+  reports = db.relationship("Report")
   title = db.Column(db.String(255))
 
 
 class Ban(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+  reports = db.relationship("Report")
   post = db.Column(db.Boolean())
   comment = db.Column(db.Boolean())
   vote  = db.Column(db.Integer)
+
+class Report(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  reporter_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+  reason = db.Column(db.String(500))
