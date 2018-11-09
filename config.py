@@ -11,7 +11,7 @@ CSRF_ENABLED = True
 # This dictates if debugging tools should be enabled, having this
 # set to True when in production is seriously asking for trouble.
 # ALWAYS turn this off before running in production.
-DEBUG = True
+DEBUG = False
 
 # !! IMPORTANT !!
 # Make sure this is set to something securely random
