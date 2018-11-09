@@ -3,4 +3,4 @@ flask_security
 flask_sqlalchemy
 jsonschema
 faker
-psycopg2
+psycopg2-binary
