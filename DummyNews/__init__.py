@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 
 from DummyNews.models import *
-from DummyNews.generator import RandomUser, RandomPost, RandomJobListing
+from DummyNews.generator import *
 
 def create_app(environment=None):
 
@@ -32,6 +32,12 @@ def create_app(environment=None):
     RandomUser(db_session=db).generate(20)
     RandomPost(db_session=db).generate(20)
     RandomJobListing(db_session=db).generate(100)
+    RandomBan(db_session=db).generate(30)
+    RandomBanAppeal(db_session=db).generate(30)
+    RandomDMCA(db_session=db).generate(10)
+    RandomGDPR(db_session=db).generate(10)
+    RandomReport(db_session=db).generate(30)
+
 
     db.session.commit()
     pass

@@ -32,7 +32,7 @@ SECURITY_REGISTERABLE = True
 SECURITY_SEND_REGISTER_EMAIL = False
 
 # Where to store the database file.
-SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/db.sqlite'
+SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Minimizes HTML when generating templates if set to True.
