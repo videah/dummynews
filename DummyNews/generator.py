@@ -57,7 +57,7 @@ class CommentGenerator(object):
   def generate(self, n, parent=0, replies=False):
     comments = []
     for _ in range(n):
-      c = Comment(text=fake.sentence(nb_words=250), parent_id=parent)
+      c = Comment(text=fake.sentence(nb_words=15), parent_id=parent)
       if replies:
         c.replies = self.generate(10, parent=c.id, replies=False)
       self.db.session.add(c)
@@ -172,7 +172,7 @@ class RandomBanAppeal(object):
       ban = rnd(bans)
       appeals.append(BanAppeal(
         ban_id=ban.id, user_id = ban.user_id,
-        appeal_reason = fake.sentence(nb_words=40),
+        appeal_reason = fake.sentence(nb_words=20),
         creation_date = datetime.now()
       ))
       self.db.session.add(appeals[len(appeals) - 1])
@@ -246,7 +246,7 @@ class RandomReport(object):
 
   def report_post(self):
     return Report(
-      reason=fake.sentence(nb_words=30),
+      reason=fake.sentence(nb_words=20),
       reporter_id=rnd(get_or_create_users(self.db, 10)).id,
       post_id=rnd(get_or_create_posts(self.db, 10)).id,
       creation_date=datetime.now()
@@ -254,7 +254,7 @@ class RandomReport(object):
 
   def report_job(self):
     return Report(
-      reason=fake.sentence(nb_words=30),
+      reason=fake.sentence(nb_words=20),
       reporter_id=rnd(get_or_create_users(self.db, 10)).id,
       job_id=rnd(get_or_create_jobs(self.db, 10)).id,
       creation_date=datetime.now()
@@ -262,7 +262,7 @@ class RandomReport(object):
 
   def report_comment(self):
     return Report(
-      reason=fake.sentence(nb_words=30),
+      reason=fake.sentence(nb_words=20),
       reporter_id=rnd(get_or_create_users(self.db, 10)).id,
       comment_id=rnd(get_or_create_comments(self.db, 10)).id,
       creation_date=datetime.now()
