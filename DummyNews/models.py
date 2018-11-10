@@ -63,7 +63,7 @@ class Comment(db.Model):
   text = db.Column(db.String(2000))
   creation_date = db.Column(db.DateTime)
   poster_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-  parent_id = db.Column(db.Integer, db.ForeignKey("comment.id"))
+  parent_id = db.Column(db.Integer, db.ForeignKey("comment.id"), nullable=True)
   post_id = db.Column(db.Integer, db.ForeignKey("post.id"))
   reports = db.relationship("Report")
   replies = db.relationship(

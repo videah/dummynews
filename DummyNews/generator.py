@@ -55,6 +55,8 @@ class CommentGenerator(object):
     self.db = db_session
 
   def generate(self, n, parent=0, replies=False):
+    parent = None if parent == 0 else parent
+
     comments = []
     for _ in range(n):
       c = Comment(text=fake.sentence(nb_words=15), parent_id=parent)
@@ -141,7 +143,7 @@ class RandomBan(object):
         user_id = rnd(users).id,
         ban_date = datetime.now(), expiry_date = datetime.now(),
         post = rnd([True, False]),
-        comment = rnd([True, False]), vote = rnd([True, False])
+        comment = rnd([True, False]), vote = rnd([i for i in range(100)])
       ))
 
       self.db.session.add(bans[len(bans)-1])
